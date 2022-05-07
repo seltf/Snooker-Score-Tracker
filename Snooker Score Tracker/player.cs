@@ -8,8 +8,9 @@ namespace Snooker_Score_Tracker
 {
     class player
     {
-        int playerNumber { get; set; }
-        string name { get; set; }
-        int score { get; set; }
+        public int playerNumber { get; set; }
+        public string name { get; set; }
+        public int score { get; set; }
+        public int currentBreak { get; set; }
     }
 }
