@@ -6,29 +6,41 @@ using System.Threading.Tasks;
 
 namespace Snooker_Score_Tracker
 {
-    internal class game
+    internal class Game
     {
-        public player playerOne { get; set; }
-        public player playerTwo { get; set; }
-        public table table { get; set; }
+        public Player playerOne { get; set; }
+        public Player playerTwo { get; set; }
+        public Table table { get; set; }
 
 
-        public int calcRemainingPoints(int reds)
+        public int calcRemainingPoints(int redsRemaining)
         {
             //value of each red remaining
-            int score = reds * table.RED;
+            int score = redsRemaining * Table.RED;
 
             //value of each subsequent black
-            score += reds * table.BLACK;
+            score += redsRemaining * Table.BLACK;
 
             //value of clearing remaining colours
-            score += table.YELLOW;
-            score += table.GREEN;
-            score += table.BROWN;
-            score += table.BLUE;
-            score += table.PINK;
-            score += table.BLACK;
+            score += Table.YELLOW;
+            score += Table.GREEN;
+            score += Table.BROWN;
+            score += Table.BLUE;
+            score += Table.PINK;
+            score += Table.BLACK;
             return score;
+        }      
+        public void printStats()
+        {
+
+        }
+        public int calcPointsRequiredToWin(int playerOneScore, int playerTwoScore, int redsRemaining) // 74 points to win frame
+        {
+            int pointsRequired = 0;
+
+            pointsRequired = 74 - playerOneScore;
+
+            return pointsRequired;
         }
     }
 }

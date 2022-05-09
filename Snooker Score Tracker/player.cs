@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Snooker_Score_Tracker
 {
-    class player
+    class Player
     {
         public int playerNumber { get; set; }
         public string name { get; set; }
         public int score { get; set; }
         public int currentBreak { get; set; }
+        
     }
 }
