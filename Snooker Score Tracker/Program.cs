@@ -47,30 +47,50 @@ namespace Snooker_Score_Tracker
             int redsRemaining = table.count(red);
             Console.WriteLine($"Max Remaining: {game.calcRemainingPoints(redsRemaining)}");
             
-
+            var activePlayer = playerOne;
             Parser parser = new Parser();
             while (game.table.isTableClear(table) == false) // ??
             {
+                Console.Write("-> ");
                 var input = Console.ReadLine().Split(' ');
 
                 // string -> Ball.colour
-                var activePlayer = playerOne;
 
                 switch (input[0])
                 {
-                    case "pot":
+                    case "pot": // pots a designated ball
                         game.table.potBall(activePlayer, game.table.tableState.First(b => b.colour == input[1]));
+                        Console.WriteLine($"{activePlayer.name}'s break: {activePlayer.currentBreak} | score: {activePlayer.score}.");
                         break;
-                    case "stats":
+                    case "miss": // reset break and pass turn to other player
+                        Console.WriteLine($"{activePlayer.name} missed!");
+                        activePlayer.currentBreak = 0;
+
+                        if (activePlayer == playerOne)
+                        {
+                            activePlayer = playerTwo;
+                        }
+                        else
+                        {
+                            activePlayer = playerOne;
+                        }
+
+                        Console.WriteLine($"It is now {activePlayer.name}'s turn.");
+                        break;
+                    case "score": // shows current scores
+                        Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
+                        break;
+                    case "resign":
+
+                    case "help": // list commands
+                    case "?":
+                        Console.WriteLine("Commands: pot <ball colour> | miss | score");
                         break;
                     default:
                         Console.WriteLine("Command not found.");
                         break;
                 }
-
-            }
-            
-            
+            }       
         }
     }
 }
