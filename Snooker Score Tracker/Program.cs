@@ -44,12 +44,10 @@ namespace Snooker_Score_Tracker
             Game game = new Game();
             game.table = table;
 
-            int redsRemaining = table.count(red);
-            Console.WriteLine($"Max Remaining: {game.calcRemainingPoints(redsRemaining)}");
-            
+            // main loop, runs while table is not clear.            
             var activePlayer = playerOne;
             Parser parser = new Parser();
-            while (game.table.isTableClear(table) == false) // ??
+            while (game.table.isTableClear(table) == false)
             {
                 Console.Write("-> ");
                 var input = Console.ReadLine().Split(' ');
@@ -80,8 +78,13 @@ namespace Snooker_Score_Tracker
                     case "score": // shows current scores
                         Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
                         break;
+                    case "stats":
+                        Console.WriteLine($"There are {game.calcRemainingPoints(table.count(red))} points on the table.");
+                        Console.WriteLine($"{activePlayer.name} needs {game.calcPointsRequiredToWin(activePlayer)} points to win the frame.");
+                        break;
                     case "resign":
-
+                        Console.WriteLine($"{activePlayer.name} has resigned!");
+                        break;
                     case "help": // list commands
                     case "?":
                         Console.WriteLine("Commands: pot <ball colour> | miss | score");

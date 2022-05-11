@@ -30,15 +30,15 @@ namespace Snooker_Score_Tracker
             score += Table.BLACK;
             return score;
         }      
-        public void printStats()
+        public void foul()
         {
-
+            // not yet implemented
         }
-        public int calcPointsRequiredToWin(int playerOneScore, int playerTwoScore, int redsRemaining) // 74 points to win frame
+        public int calcPointsRequiredToWin(Player player) // 74 points to win frame
         {
             int pointsRequired = 0;
 
-            pointsRequired = 74 - playerOneScore;
+            pointsRequired = 74 - player.score;
 
             return pointsRequired;
         }
