@@ -16,15 +16,5 @@ namespace Snooker_Score_Tracker
             colour = s;
             value = i;
         }
-        public void createBalls() 
-        {
-            Ball red = new Ball("red", 1);
-            Ball yellow = new Ball("yellow", 2);
-            Ball green = new Ball("green", 3);
-            Ball brown = new Ball("brown", 4);
-            Ball blue = new Ball("blue", 5);
-            Ball pink = new Ball("pink", 6);
-            Ball black = new Ball("black", 7);
-        }
     }
 }
