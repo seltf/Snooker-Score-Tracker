@@ -36,11 +36,7 @@ namespace Snooker_Score_Tracker
         }
         public int calcPointsRequiredToWin(Player player) // 74 points to win frame
         {
-            int pointsRequired = 0;
-
-            pointsRequired = 74 - player.score;
-
-            return pointsRequired;
+            return 74 - player.score;
         }
     }
 }
