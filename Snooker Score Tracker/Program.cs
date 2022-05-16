@@ -79,6 +79,7 @@ namespace Snooker_Score_Tracker
                         Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
                         break;
                     case "stats":
+                        Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
                         Console.WriteLine($"There are {game.calcRemainingPoints(table.count(red))} points on the table.");
                         Console.WriteLine($"{activePlayer.name} needs {game.calcPointsRequiredToWin(activePlayer)} points to win the frame.");
                         break;
