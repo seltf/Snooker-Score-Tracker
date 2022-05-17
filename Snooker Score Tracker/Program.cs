@@ -87,7 +87,7 @@ namespace Snooker_Score_Tracker
                         break;
                     case "help": // list commands
                     case "?":
-                        Console.WriteLine("Commands: pot <ball colour> | miss | score");
+                        Console.WriteLine("Commands: pot <ball colour> | miss | score | resign");
                         break;
                     default:
                         Console.WriteLine("Command not found.");
