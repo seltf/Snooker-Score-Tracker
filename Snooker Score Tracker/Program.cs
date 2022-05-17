@@ -46,7 +46,6 @@ namespace Snooker_Score_Tracker
 
             // main loop, runs while table is not clear.            
             var activePlayer = playerOne;
-            Parser parser = new Parser();
             while (game.table.isTableClear(table) == false)
             {
                 Console.Write("-> ");
