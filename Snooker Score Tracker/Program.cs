@@ -14,6 +14,7 @@ namespace Snooker_Score_Tracker
             //creating players
             Player playerOne = new Player();
             Player playerTwo = new Player();
+            var activePlayer = playerOne;
 
             Console.WriteLine("Enter player one's name: ");
             playerOne.name = Console.ReadLine();
@@ -45,7 +46,6 @@ namespace Snooker_Score_Tracker
             game.table = table;
 
             // main loop, runs while table is not clear.            
-            var activePlayer = playerOne;
             while (game.table.isTableClear(table) == false)
             {
                 Console.Write("-> ");
