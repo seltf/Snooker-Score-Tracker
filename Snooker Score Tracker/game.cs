@@ -16,18 +16,18 @@ namespace Snooker_Score_Tracker
         public int calcRemainingPoints(int redsRemaining)
         {
             //value of each red remaining
-            int score = redsRemaining * Table.RED;
+            int score = redsRemaining * Ball.RED;
 
             //value of each subsequent black
-            score += redsRemaining * Table.BLACK;
+            score += redsRemaining * Ball.BLACK;
 
             //value of clearing remaining colours
-            score += Table.YELLOW;
-            score += Table.GREEN;
-            score += Table.BROWN;
-            score += Table.BLUE;
-            score += Table.PINK;
-            score += Table.BLACK;
+            score += Ball.YELLOW;
+            score += Ball.GREEN;
+            score += Ball.BROWN;
+            score += Ball.BLUE;
+            score += Ball.PINK;
+            score += Ball.BLACK;
             return score;
         }      
         public void foul()

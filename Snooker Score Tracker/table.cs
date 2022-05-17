@@ -8,14 +8,6 @@ namespace Snooker_Score_Tracker
 {
     class Table
     {
-        public const int RED = 1;
-        public const int YELLOW = 2;
-        public const int GREEN = 3;
-        public const int BROWN = 4;
-        public const int BLUE = 5;
-        public const int PINK = 6;
-        public const int BLACK = 7;
-
         public List<Ball> tableState { get; set; } = new List<Ball>(); // ball, quantity
 
         public int redsRemaining { get; set; }
