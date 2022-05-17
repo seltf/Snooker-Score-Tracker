@@ -11,7 +11,6 @@ namespace Snooker_Score_Tracker
         public int playerNumber { get; set; }
         public string name { get; set; }
         public int score { get; set; }
-        public int currentBreak { get; set; }
-        
+        public int currentBreak { get; set; }       
     }
 }
