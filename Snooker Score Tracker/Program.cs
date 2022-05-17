@@ -15,6 +15,7 @@ namespace Snooker_Score_Tracker
             Player playerOne = new Player();
             Player playerTwo = new Player();
             var activePlayer = playerOne;
+            
 
             Console.WriteLine("Enter player one's name: ");
             playerOne.name = Console.ReadLine();
