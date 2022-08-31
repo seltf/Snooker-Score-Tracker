@@ -54,7 +54,7 @@ namespace Snooker_Score_Tracker
         /// <param name="player"></param>
         /// <param name="table"></param>
         /// <param name="ball"></param>
-        public int potBall(Player player, Ball ball)
+        public int potBall(Ball ball)
         {
             // check if ball is on table
             bool ballPresent = searchTable(ball);
