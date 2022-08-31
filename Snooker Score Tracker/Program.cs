@@ -14,7 +14,6 @@ namespace Snooker_Score_Tracker
             //creating players
             Player playerOne = new Player();
             Player playerTwo = new Player();
-            var activePlayer = playerOne;
             
 
             Console.WriteLine("Enter player one's name: ");
@@ -45,6 +44,7 @@ namespace Snooker_Score_Tracker
             //creating game
             Game game = new Game();
             game.table = table;
+            game.activePlayer = playerOne;
 
             // main loop, runs while table is not clear.            
             while (game.table.isTableClear(table) == false)
@@ -58,21 +58,13 @@ namespace Snooker_Score_Tracker
                 {
                     case "pot": // pots a designated ball
 
-                        game.ballHandler(activePlayer, game.table.tableState.First(b => b.colour == input[1]));
-                        Console.WriteLine($"{activePlayer.name}'s break: {activePlayer.currentBreak} | score: {activePlayer.score}.");
+                        game.ballHandler(game.activePlayer, game.table.tableState.First(b => b.colour == input[1]));
+                        Console.WriteLine($"{game.activePlayer.name}'s break: {game.activePlayer.currentBreak} | score: {game.activePlayer.score}.");
                         break;
                     case "miss": // reset break and pass turn to other player
-                        Console.WriteLine($"{activePlayer.name} missed!");
-                        activePlayer.currentBreak = 0;
-                        if (activePlayer == playerOne)
-                        {
-                            activePlayer = playerTwo;
-                        }
-                        else
-                        {
-                            activePlayer = playerOne;
-                        }
-                        Console.WriteLine($"It is now {activePlayer.name}'s turn.");
+                        Console.WriteLine($"{game.activePlayer.name} missed!");
+                        game.switchPlayer();
+                        Console.WriteLine($"It is now {game.activePlayer.name}'s turn.");
                         break;
                     case "score": // shows current scores
                         Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
@@ -80,10 +72,10 @@ namespace Snooker_Score_Tracker
                     case "stats":
                         Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
                         Console.WriteLine($"There are {game.calcRemainingPoints(table.count(red))} points on the table.");
-                        Console.WriteLine($"{activePlayer.name} needs {game.calcPointsRequiredToWin(activePlayer)} points to win the frame.");
+                        Console.WriteLine($"{game.activePlayer.name} needs {game.calcPointsRequiredToWin(game.activePlayer)} points to win the frame.");
                         break;
                     case "resign":
-                        Console.WriteLine($"{activePlayer.name} has resigned!");
+                        Console.WriteLine($"{game.activePlayer.name} has resigned!");
                         break;
                     case "help": // list commands
                     case "?":

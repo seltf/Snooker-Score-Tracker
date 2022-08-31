@@ -11,6 +11,7 @@ namespace Snooker_Score_Tracker
         public Player playerOne { get; set; }
         public Player playerTwo { get; set; }
         public Table table { get; set; }
+        public Player activePlayer { get; set; }
 
 
         public int calcRemainingPoints(int redsRemaining)
@@ -43,6 +44,11 @@ namespace Snooker_Score_Tracker
             Console.WriteLine("otherPlayer is broken.");
             return currentPlayer;
         }
+        public void switchPlayer()
+        {
+            activePlayer.currentBreak = 0;
+            activePlayer = otherPlayer(activePlayer);     
+        }
         public int calcPointsRequiredToWin(Player player) // 74 points to win frame
         {
             return 74 - player.score;
@@ -72,13 +78,30 @@ namespace Snooker_Score_Tracker
                     {
                         otherPlayer(currentPlayer).score += 4;
                     }
+                    switchPlayer();
+                    return;
                 }
             }
-
             // foul if pot two reds in a row
-            if  (currentPlayer.ballLastPotted == Ball.RED && ball.value != Ball.RED)
+            if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
                 otherPlayer(currentPlayer).score += 4;
+                return;
+            }
+            // did you pot a red before a colour?
+            if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
+            {
+                // foul
+                if (currentPlayer.ballLastPotted > 4)
+                {
+                    otherPlayer(currentPlayer).score += ball.value;
+                }
+                else
+                {
+                    otherPlayer(currentPlayer).score += 4;
+                }
+                switchPlayer();
+                return;
             }
 
             currentPlayer.ballLastPotted = ball.value;
