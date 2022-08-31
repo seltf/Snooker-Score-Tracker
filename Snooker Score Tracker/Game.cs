@@ -29,14 +29,64 @@ namespace Snooker_Score_Tracker
             score += Ball.PINK;
             score += Ball.BLACK;
             return score;
-        }      
-        public void foul()
+        }
+        public Player otherPlayer(Player currentPlayer)
         {
-            // not yet implemented
+            if (currentPlayer == playerOne)
+            {
+                return playerTwo;
+            }
+            if (currentPlayer == playerTwo)
+            {
+                return playerOne;
+            }
+            Console.WriteLine("otherPlayer is broken.");
+            return currentPlayer;
         }
         public int calcPointsRequiredToWin(Player player) // 74 points to win frame
         {
             return 74 - player.score;
         }
+        public void ballHandler(Player currentPlayer, Ball ball) // :^)
+        {
+            // pots ball
+            table.potBall(ball);
+
+            // is first ball in the break?
+            if (currentPlayer.ballLastPotted == 0)
+            {
+                // is it red?
+                if (currentPlayer.ballLastPotted == Ball.RED)
+                {
+                    currentPlayer.score += ball.value;
+                }
+                //no
+                else
+                {
+                    // foul
+                    if (currentPlayer.ballLastPotted > 4)
+                    {
+                        otherPlayer(currentPlayer).score += ball.value;
+                    }
+                    else
+                    {
+                        otherPlayer(currentPlayer).score += 4;
+                    }
+                }
+            }
+
+            // foul if pot two reds in a row
+            if  (currentPlayer.ballLastPotted == Ball.RED && ball.value != Ball.RED)
+            {
+                otherPlayer(currentPlayer).score += 4;
+            }
+
+            currentPlayer.ballLastPotted = ball.value;
+
+            // add points to totals
+            //player.currentBreak += ball.value;
+            //player.score += ball.value;
+        }
+        
     }
 }
