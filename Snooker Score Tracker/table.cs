@@ -8,7 +8,7 @@ namespace Snooker_Score_Tracker
 {
     class Table
     {
-        public List<Ball> tableState { get; set; } = new List<Ball>(); // ball, quantity
+        public List<Ball> tableState { get; set; } = new List<Ball>();
 
         public int redsRemaining { get; set; }
         
