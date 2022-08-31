@@ -54,16 +54,12 @@ namespace Snooker_Score_Tracker
         /// <param name="player"></param>
         /// <param name="table"></param>
         /// <param name="ball"></param>
-        public void potBall(Player player, Ball ball)
+        public int potBall(Player player, Ball ball)
         {
             // check if ball is on table
             bool ballPresent = searchTable(ball);
             if (ballPresent)
             {
-                // add points to totals
-                player.currentBreak += ball.value;
-                player.score += ball.value;
-
                 // remove red ball from table
                 if (ball.colour == "red")
                 {
@@ -75,10 +71,13 @@ namespace Snooker_Score_Tracker
                 {
                     this.tableState.Remove(ball);
                 }
+
+                return ball.value;
             }
             else
             {
                 Console.WriteLine("Ball not on table.");
+                return 0;
             }
         }
     }

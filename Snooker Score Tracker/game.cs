@@ -38,5 +38,9 @@ namespace Snooker_Score_Tracker
         {
             return 74 - player.score;
         }
+
+        // add points to totals
+        player.currentBreak += ball.value;
+                player.score += ball.value;
     }
 }
