@@ -12,15 +12,10 @@ namespace Snooker_Score_Tracker
             Console.WriteLine("==========================");
 
             //creating players
-            Player playerOne = new Player();
-            Player playerTwo = new Player();
-            
+            //Player playerOne = new Player();
+            //Player playerTwo = new Player();
 
-            Console.WriteLine("Enter player one's name: ");
-            playerOne.name = Console.ReadLine();
 
-            Console.WriteLine("Enter player two's name: ");
-            playerTwo.name = Console.ReadLine();
 
             //creating balls
             Ball red = new Ball("red", 1);
@@ -44,7 +39,17 @@ namespace Snooker_Score_Tracker
             //creating game
             Game game = new Game();
             game.table = table;
-            game.activePlayer = playerOne;
+
+            // creating players
+            game.playerOne = new Player();
+            game.playerTwo = new Player();
+            game.activePlayer = game.playerOne;
+
+            Console.WriteLine("Enter player one's name: ");
+            game.playerOne.name = Console.ReadLine();
+
+            Console.WriteLine("Enter player two's name: ");
+            game.playerTwo.name = Console.ReadLine();
 
             // main loop, runs while table is not clear.            
             while (game.table.isTableClear(table) == false)
@@ -67,10 +72,10 @@ namespace Snooker_Score_Tracker
                         Console.WriteLine($"It is now {game.activePlayer.name}'s turn.");
                         break;
                     case "score": // shows current scores
-                        Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
+                        Console.WriteLine($"{game.playerOne.name} [{game.playerOne.score}] | [{game.playerTwo.score}] {game.playerTwo.name}");
                         break;
                     case "stats":
-                        Console.WriteLine($"{playerOne.name} [{playerOne.score}] | [{playerTwo.score}] {playerTwo.name}");
+                        Console.WriteLine($"{game.playerOne.name} [{game.playerOne.score}] | [{game.playerTwo.score}] {game.playerTwo.name}");
                         Console.WriteLine($"There are {game.calcRemainingPoints(table.count(red))} points on the table.");
                         Console.WriteLine($"{game.activePlayer.name} needs {game.calcPointsRequiredToWin(game.activePlayer)} points to win the frame.");
                         break;
