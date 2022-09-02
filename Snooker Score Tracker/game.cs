@@ -53,6 +53,20 @@ namespace Snooker_Score_Tracker
         {
             return 74 - player.score;
         }
+        public void foul(Player currentPlayer, Ball ball)
+        {
+            // high colours award the value of the colour
+            if (currentPlayer.ballLastPotted > 4) 
+            {
+                otherPlayer(currentPlayer).score += ball.value;
+            }
+            // low colours award 4 points
+            else
+            {
+                otherPlayer(currentPlayer).score += 4;
+            }
+            switchPlayer();
+        }
         public void ballHandler(Player currentPlayer, Ball ball) // :^)
         {
             // pots ball
@@ -91,16 +105,7 @@ namespace Snooker_Score_Tracker
             // did you pot a red before a colour?
             if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
             {
-                // foul
-                if (currentPlayer.ballLastPotted > 4)
-                {
-                    otherPlayer(currentPlayer).score += ball.value;
-                }
-                else
-                {
-                    otherPlayer(currentPlayer).score += 4;
-                }
-                switchPlayer();
+                foul(currentPlayer,ball);
                 return;
             }
 
