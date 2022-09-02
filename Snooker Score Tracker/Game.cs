@@ -66,6 +66,12 @@ namespace Snooker_Score_Tracker
                 otherPlayer(currentPlayer).score += 4;
             }
             switchPlayer();
+            return;
+        }
+        public void foul(Player currentPlayer)
+        {
+            otherPlayer(currentPlayer).score += 4;
+            return;
         }
         public void ballHandler(Player currentPlayer, Ball ball) // :^)
         {
@@ -99,14 +105,12 @@ namespace Snooker_Score_Tracker
             // foul if pot two reds in a row
             if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
-                otherPlayer(currentPlayer).score += 4;
-                return;
+                foul(currentPlayer);
             }
             // did you pot a red before a colour?
             if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
             {
                 foul(currentPlayer,ball);
-                return;
             }
 
             currentPlayer.ballLastPotted = ball.value;
