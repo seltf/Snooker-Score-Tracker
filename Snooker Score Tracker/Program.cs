@@ -62,7 +62,6 @@ namespace Snooker_Score_Tracker
                 switch (input[0])
                 {
                     case "pot": // pots a designated ball
-
                         game.ballHandler(game.activePlayer, game.table.tableState.First(b => b.colour == input[1]));
                         Console.WriteLine($"{game.activePlayer.name}'s break: {game.activePlayer.currentBreak} | score: {game.activePlayer.score}.");
                         break;

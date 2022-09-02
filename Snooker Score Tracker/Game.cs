@@ -49,8 +49,9 @@ namespace Snooker_Score_Tracker
             activePlayer.currentBreak = 0;
             activePlayer = otherPlayer(activePlayer);     
         }
-        public int calcPointsRequiredToWin(Player player) // 74 points to win frame
+        public int calcPointsRequiredToWin(Player player) 
         {
+            // 74 points to win frame
             return 74 - player.score;
         }
         public void foul(Player currentPlayer, Ball ball)
@@ -82,37 +83,32 @@ namespace Snooker_Score_Tracker
             if (currentPlayer.ballLastPotted == 0)
             {
                 // is it red?
-                if (currentPlayer.ballLastPotted == Ball.RED)
+                if (ball.value == Ball.RED)
                 {
                     currentPlayer.score += ball.value;
                 }
                 //no
                 else
                 {
-                    // foul
-                    if (currentPlayer.ballLastPotted > 4)
-                    {
-                        otherPlayer(currentPlayer).score += ball.value;
-                    }
-                    else
-                    {
-                        otherPlayer(currentPlayer).score += 4;
-                    }
-                    switchPlayer();
-                    return;
+                    foul(currentPlayer, ball);
+                    Console.WriteLine($"{currentPlayer.name} potted a ball not on.");
+                    Console.WriteLine($"It is now {otherPlayer(currentPlayer).name}'s turn!");
                 }
             }
+
             // foul if pot two reds in a row
             if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
                 foul(currentPlayer);
             }
+
             // did you pot a red before a colour?
             if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
             {
                 foul(currentPlayer,ball);
             }
 
+            // update last ball potted
             currentPlayer.ballLastPotted = ball.value;
 
             // add points to totals

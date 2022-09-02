@@ -12,6 +12,6 @@ namespace Snooker_Score_Tracker
         public string name { get; set; }
         public int score { get; set; }
         public int currentBreak { get; set; }
-        public int ballLastPotted { get; set; }
+        public int ballLastPotted { get; set; } = 0;
     }
 }
