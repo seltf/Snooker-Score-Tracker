@@ -31,18 +31,18 @@ namespace Snooker_Score_Tracker
             score += Ball.BLACK;
             return score;
         }
-        public Player otherPlayer(Player currentPlayer)
+        public Player otherPlayer(Player player)
         {
-            if (currentPlayer == playerOne)
+            if (player == playerOne)
             {
                 return playerTwo;
             }
-            if (currentPlayer == playerTwo)
+            if (player == playerTwo)
             {
                 return playerOne;
             }
             Console.WriteLine("otherPlayer is broken.");
-            return currentPlayer;
+            return player;
         }
         public void switchPlayer()
         {
@@ -60,68 +60,68 @@ namespace Snooker_Score_Tracker
             player.currentBreak += ball.value;
             player.score += ball.value;
         }
-        public void foul(Player currentPlayer, Ball ball)
+        public void foul(Player player, Ball ball)
         {
             // high colours award the value of the colour
             if (ball.value > 4) 
             {
-                otherPlayer(currentPlayer).score += ball.value;
-                Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded {ball.value} points.");
+                otherPlayer(player).score += ball.value;
+                Console.WriteLine($"{otherPlayer(player).name} has been awarded {ball.value} points.");
             }
             // low colours award 4 points
             else
             {
-                otherPlayer(currentPlayer).score += 4;
-                Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded 4 points.");
+                otherPlayer(player).score += 4;
+                Console.WriteLine($"{otherPlayer(player).name} has been awarded 4 points.");
             }
             switchPlayer();
         }
-        public void foul(Player currentPlayer)
+        public void foul(Player player)
         {
-            otherPlayer(currentPlayer).score += 4;
-            Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded 4 points.");
+            otherPlayer(player).score += 4;
+            Console.WriteLine($"{otherPlayer(player).name} has been awarded 4 points.");
             switchPlayer();
         }
-        public void ballHandler(Player currentPlayer, Ball ball) // :^)
+        public void ballHandler(Player player, Ball ball) // :^)
         {
             // pots ball
             table.potBall(ball);
 
             // is first ball in the break?
-            if (currentPlayer.ballLastPotted == 0)
+            if (player.ballLastPotted == 0)
             {
                 // is it red?
                 if (ball.value == Ball.RED)
                 {
-                    score(currentPlayer, ball);
+                    score(player, ball);
                 }
                 //no
                 else
                 {                    
-                    Console.WriteLine($"{currentPlayer.name} potted a ball not on.");
-                    foul(currentPlayer, ball);
+                    Console.WriteLine($"{player.name} potted a ball not on.");
+                    foul(player, ball);
                     return;
                 }
             }
 
             // foul if pot two reds in a row
-            if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
+            if  (player.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
                 Console.WriteLine("You must pot a colour after potting a red.");
-                foul(currentPlayer);
+                foul(player);
                 return;
             }
 
             // did you pot a red before a colour?
-            if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
+            if (ball.value > 1 && player.ballLastPotted != 1)
             {
                 Console.WriteLine("You must pot a red before potting a colour.");
-                foul(currentPlayer,ball);
+                foul(player,ball);
                 return;
             }
 
             // update last ball potted
-            currentPlayer.ballLastPotted = ball.value;
+            player.ballLastPotted = ball.value;
 
             // add points to totals
             //player.currentBreak += ball.value;
