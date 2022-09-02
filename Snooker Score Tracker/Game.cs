@@ -47,12 +47,18 @@ namespace Snooker_Score_Tracker
         public void switchPlayer()
         {
             activePlayer.currentBreak = 0;
-            activePlayer = otherPlayer(activePlayer);     
+            activePlayer = otherPlayer(activePlayer);
+            Console.WriteLine($"It is {activePlayer.name}'s turn.");
         }
         public int calcPointsRequiredToWin(Player player) 
         {
             // 74 points to win frame
             return 74 - player.score;
+        }
+        public void score(Player player, Ball ball)
+        {
+            player.currentBreak += ball.value;
+            player.score += ball.value;
         }
         public void foul(Player currentPlayer, Ball ball)
         {
@@ -67,7 +73,6 @@ namespace Snooker_Score_Tracker
             {
                 otherPlayer(currentPlayer).score += 4;
                 Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded 4 points.");
-
             }
             switchPlayer();
         }
@@ -88,13 +93,13 @@ namespace Snooker_Score_Tracker
                 // is it red?
                 if (ball.value == Ball.RED)
                 {
-                    currentPlayer.score += ball.value;
+                    score(currentPlayer, ball);
                 }
                 //no
                 else
-                {
-                    foul(currentPlayer, ball);
+                {                    
                     Console.WriteLine($"{currentPlayer.name} potted a ball not on.");
+                    foul(currentPlayer, ball);
                     return;
                 }
             }
@@ -102,6 +107,7 @@ namespace Snooker_Score_Tracker
             // foul if pot two reds in a row
             if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
+                Console.WriteLine("You must pot a colour after potting a red.");
                 foul(currentPlayer);
                 return;
             }
@@ -109,6 +115,7 @@ namespace Snooker_Score_Tracker
             // did you pot a red before a colour?
             if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
             {
+                Console.WriteLine("You must pot a red before potting a colour.");
                 foul(currentPlayer,ball);
                 return;
             }
