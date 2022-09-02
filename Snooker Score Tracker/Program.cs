@@ -68,7 +68,6 @@ namespace Snooker_Score_Tracker
                     case "miss": // reset break and pass turn to other player
                         Console.WriteLine($"{game.activePlayer.name} missed!");
                         game.switchPlayer();
-                        Console.WriteLine($"It is now {game.activePlayer.name}'s turn.");
                         break;
                     case "score": // shows current scores
                         Console.WriteLine($"{game.playerOne.name} [{game.playerOne.score}] | [{game.playerTwo.score}] {game.playerTwo.name}");
