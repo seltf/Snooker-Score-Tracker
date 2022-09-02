@@ -57,7 +57,7 @@ namespace Snooker_Score_Tracker
         public void foul(Player currentPlayer, Ball ball)
         {
             // high colours award the value of the colour
-            if (currentPlayer.ballLastPotted > 4) 
+            if (ball.value > 4) 
             {
                 otherPlayer(currentPlayer).score += ball.value;
             }
@@ -67,12 +67,11 @@ namespace Snooker_Score_Tracker
                 otherPlayer(currentPlayer).score += 4;
             }
             switchPlayer();
-            return;
         }
         public void foul(Player currentPlayer)
         {
             otherPlayer(currentPlayer).score += 4;
-            return;
+            switchPlayer();
         }
         public void ballHandler(Player currentPlayer, Ball ball) // :^)
         {
@@ -92,7 +91,7 @@ namespace Snooker_Score_Tracker
                 {
                     foul(currentPlayer, ball);
                     Console.WriteLine($"{currentPlayer.name} potted a ball not on.");
-                    Console.WriteLine($"It is now {otherPlayer(currentPlayer).name}'s turn!");
+                    return;
                 }
             }
 
@@ -100,12 +99,14 @@ namespace Snooker_Score_Tracker
             if  (currentPlayer.ballLastPotted == Ball.RED && ball.value == Ball.RED)
             {
                 foul(currentPlayer);
+                return;
             }
 
             // did you pot a red before a colour?
             if (ball.value > 1 && currentPlayer.ballLastPotted != 1)
             {
                 foul(currentPlayer,ball);
+                return;
             }
 
             // update last ball potted

@@ -54,6 +54,7 @@ namespace Snooker_Score_Tracker
             // main loop, runs while table is not clear.            
             while (game.table.isTableClear(table) == false)
             {
+                Console.WriteLine($"It is {game.activePlayer.name}'s turn.");
                 Console.Write("-> ");
                 var input = Console.ReadLine().Split(' ');
 
