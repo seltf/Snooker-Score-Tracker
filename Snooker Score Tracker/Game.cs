@@ -114,7 +114,6 @@ namespace Snooker_Score_Tracker
             // add points to totals
             //player.currentBreak += ball.value;
             //player.score += ball.value;
-        }
-        
+        }      
     }
 }
