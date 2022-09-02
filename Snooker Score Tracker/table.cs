@@ -45,7 +45,6 @@ namespace Snooker_Score_Tracker
             {
                 ballPresent = false;
             }
-
             return ballPresent;
         }
         /// <summary>
@@ -67,6 +66,7 @@ namespace Snooker_Score_Tracker
                 }
                 int reds = this.tableState.Where(b => b.colour == "red").Count();
 
+                // only remove colours when there are no reds remaining
                 if (reds == 0 && ball.value != 1)
                 {
                     this.tableState.Remove(ball);
