@@ -60,17 +60,21 @@ namespace Snooker_Score_Tracker
             if (ball.value > 4) 
             {
                 otherPlayer(currentPlayer).score += ball.value;
+                Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded {ball.value} points.");
             }
             // low colours award 4 points
             else
             {
                 otherPlayer(currentPlayer).score += 4;
+                Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded 4 points.");
+
             }
             switchPlayer();
         }
         public void foul(Player currentPlayer)
         {
             otherPlayer(currentPlayer).score += 4;
+            Console.WriteLine($"{otherPlayer(currentPlayer).name} has been awarded 4 points.");
             switchPlayer();
         }
         public void ballHandler(Player currentPlayer, Ball ball) // :^)
